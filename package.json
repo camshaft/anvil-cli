@@ -1,0 +1,28 @@
+{
+  "name": "node-anvil",
+  "version": "0.1.0",
+  "description": "Anvil for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camshaft/node-anvil.git"
+  },
+  "keywords": [
+    "anvil",
+    "heroku"
+  ],
+  "author": "Cameron Bytheway <bytheway.cameron@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camshaft/node-anvil/issues"
+  },
+  "homepage": "https://github.com/camshaft/node-anvil",
+  "dependencies": {
+    "slide": "^1.1.5",
+    "superagent": "^0.17.0",
+    "envs": "^0.1.4"
+  }
+}
