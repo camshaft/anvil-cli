@@ -1,14 +1,17 @@
 {
-  "name": "node-anvil",
+  "name": "anvil-cli",
   "version": "0.1.0",
-  "description": "Anvil for node",
+  "description": "Anvil client for node",
   "main": "index.js",
+  "bin": {
+    "anvil": "bin/anvil"
+  },
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha -t 20000"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/camshaft/node-anvil.git"
+    "url": "https://github.com/camshaft/anvil-cli.git"
   },
   "keywords": [
     "anvil",
@@ -17,12 +20,20 @@
   "author": "Cameron Bytheway <bytheway.cameron@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/camshaft/node-anvil/issues"
+    "url": "https://github.com/camshaft/anvil-cli/issues"
   },
-  "homepage": "https://github.com/camshaft/node-anvil",
+  "homepage": "https://github.com/camshaft/anvil-cli",
   "dependencies": {
     "slide": "^1.1.5",
     "superagent": "^0.17.0",
-    "envs": "^0.1.4"
+    "envs": "^0.1.4",
+    "glob": "^3.2.9",
+    "graceful-fs": "^2.0.3",
+    "batch": "^0.5.0",
+    "commander": "^2.2.0"
+  },
+  "devDependencies": {
+    "should": "^3.2.0",
+    "mocha": "^1.18.2"
   }
 }

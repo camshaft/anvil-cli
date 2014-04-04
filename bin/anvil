@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies
+ */
+
+var program = require('commander');
+var anvil = require('..');
+var read = require('fs').readFileSync;
+
+program
+  .version(require('../package.json').version)
+  .usage('<source> [options]')
+  .option('-b, --buildpack <URL>', 'use a custom buildpack')
+  .option('-p, --pipeline', 'pipe build output to stderr and only put the slug url on stdout')
+  .option('-e, --env <env>', 'env file or json to upload')
+  .parse(process.argv);
+
+var source = program.args[0];
+if (!source) return error('missing source');
+
+var opts = {
+  buildpack: program.buildpack
+};
+
+if (program.pipeline) opts.logger = function(str) { process.stderr.write(str); };
+
+var env = program.env;
+if (env) {
+  try {
+    read(env, 'utf8').split('\n').forEach(parseLine(opts.env = {}));
+  } catch(err) {
+    env.split(',').forEach(parseLine(opts.env = {}));
+  };
+}
+
+anvil(source, opts, function(err, slug) {
+  if (err) return error(err);
+  console.log(slug);
+});
+
+function error(err) {
+  console.error(err.stack || err.message || err);
+  process.exit(1);
+}
+
+function parseLine(obj) {
+  return function(line) {
+    if (!line) return;
+    var parts = line.split('=');
+    obj[parts[0]] = parts[1];
+  };
+}
